@@ -6,7 +6,7 @@
     "test": "NODE_OPTIONS=--experimental-vm-modules jest --detectOpenHandles",
     "submit": "acc submit main.ts -- -l 5058",
     "test:ci": "npm run test -- --colors --coverage --ci",
-    "lint": "eslint --ext .ts ."
+    "lint": "eslint --fix 'problem/**/*.ts'"
   },
   "license": "MIT",
   "devDependencies": {
