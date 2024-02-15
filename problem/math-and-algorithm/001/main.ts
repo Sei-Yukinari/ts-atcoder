@@ -1,30 +1,88 @@
 import * as fs from "fs";
 
-export const createInput = (str: string) => {
-  const lines = str.split("\n");
-  let index = 0;
+const createInputHandlers = (str: string) => {
+  const inputArray = str.split(/\s/);
+  let currentIndex = 0;
+  let outputBuffer = "";
 
-  const s = () => lines[index++] || "";
-  const n = () => Number(s());
-  const mn = (v: string[]) => v.map(Number);
-  const sp = (v: string) => v.split(" ");
+  const next = () => {
+    return inputArray[currentIndex++];
+  };
+
+  const nextNum = () => {
+    return +next();
+  };
+
+  const nextBigInt = () => {
+    return BigInt(next());
+  };
+
+  const nexts = (length: number) => {
+    const arr = [];
+    for (let i = 0; i < length; ++i) arr[i] = next();
+    return arr;
+  };
+
+  const nextNums = (length: number) => {
+    const arr = [];
+    for (let i = 0; i < length; ++i) arr[i] = nextNum();
+    return arr;
+  };
+
+  const nextBigInts = (length: number) => {
+    const arr = [];
+    for (let i = 0; i < length; ++i) arr[i] = nextBigInt();
+    return arr;
+  };
+
+  const print: {
+    (out: string | number | bigint): void;
+    <T>(out: Array<T>, separator: string): void;
+  } = (out: string | number | bigint | Array<any>, separator?: string) => {
+    if (Array.isArray(out)) {
+      outputBuffer += out.join(separator);
+    } else {
+      outputBuffer += out;
+    }
+  };
+
+  const println: {
+    (out: string | number | bigint): void;
+    <T>(out: Array<T>, separator: string): void;
+  } = (out: string | number | bigint | Array<any>, separator?: string) => {
+    if (Array.isArray(out)) {
+      print(out, separator || "");
+    } else {
+      print(out);
+    }
+    print("\n");
+  };
+
+  function flush() {
+    console.log(outputBuffer);
+  }
 
   return {
-    s,
-    n,
-    mn,
-    sp,
-    ss: () => sp(s()),
-    nn: () => mn(sp(s())),
-    nls: () => mn(lines.slice(index)),
-    nnls: () => lines.slice(index).map((v: string) => mn(sp(v))),
+    next,
+    nextNum,
+    nextBigInt,
+    nexts,
+    nextNums,
+    nextBigInts,
+    print,
+    println,
+    flush,
   };
 };
 export const main = (orange: number): number => {
   const apple = 5;
-  const result = apple + orange;
-  return result;
+  return apple + orange;
 };
+
 const str = fs.readFileSync("/dev/stdin", "utf8");
-const input = createInput(str);
-console.log(main(input.n()));
+const input = createInputHandlers(str);
+
+const n = input.nextNum();
+const result = main(n);
+input.print(result);
+input.flush();

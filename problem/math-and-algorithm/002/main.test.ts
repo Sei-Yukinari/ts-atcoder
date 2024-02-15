@@ -1,4 +1,4 @@
-import { createInput, main } from "./main";
+import { main } from "./main";
 import * as assert from "assert";
 
 jest.mock("fs", () => ({

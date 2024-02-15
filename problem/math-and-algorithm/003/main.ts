@@ -75,6 +75,10 @@ const createInputHandlers = (str: string) => {
   };
 };
 
+export const main = (n: number, a: number[]) => {
+  return a.reduce((a, b) => a + b, 0);
+};
+
 const str = fs.readFileSync("/dev/stdin", "utf8");
 const input = createInputHandlers(str);
 
@@ -83,7 +87,3 @@ const a = input.nextNums(n);
 const result = main(n, a);
 input.print(result);
 input.flush();
-
-export function main(n: number, a: number[]) {
-  return a.reduce((a, b) => a + b, 0);
-}
