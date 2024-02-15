@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "submit": "acc submit main.ts -- -l 5058"
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest --detectOpenHandles",
+    "submit": "acc submit main.ts -- -l 5058",
+    "test:ci": "npm run test -- --colors --coverage --ci",
+    "lint": "eslint --ext .ts ."
   },
   "license": "MIT",
   "devDependencies": {
