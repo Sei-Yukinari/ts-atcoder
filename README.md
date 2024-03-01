@@ -21,6 +21,10 @@ $ oj login https://atcoder.jp
 $ acc new abc001
 ```
 
+### Test
+```bash
+$ oj t -c "ts-node main.ts"
+
 ### Submit
 ```bash
 $ acc submit main.ts -- -l 5058
