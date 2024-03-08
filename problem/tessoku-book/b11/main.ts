@@ -75,15 +75,10 @@ const createInputHandlers = (str: string) => {
   };
 };
 
-export const main = (
-  n: number,
-  a: number[],
-  q: number,
-  x: number[],
-): number[] => {
+export const main = (n: number, a: number[], x: number[]): number[] => {
   const s = a.sort((a, b) => a - b);
-  const result = x.map((v) => {
-    let count = 0;
+  return x.map((v) => {
+    let count: number;
     let left = 0;
     let right = n;
     while (left < right) {
@@ -97,7 +92,6 @@ export const main = (
     count = left;
     return count;
   });
-  return result;
 };
 
 const str = fs.readFileSync("/dev/stdin", "utf8");
@@ -112,7 +106,7 @@ if (str !== "") {
     x[i] = input.nextNum();
   }
 
-  const result = main(n, a, q, x);
+  const result = main(n, a, x);
   input.print(result.join("\n"));
   input.flush();
 }
