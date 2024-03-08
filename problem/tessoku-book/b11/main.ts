@@ -78,7 +78,6 @@ const createInputHandlers = (str: string) => {
 export const main = (n: number, a: number[], x: number[]): number[] => {
   const s = a.sort((a, b) => a - b);
   return x.map((v) => {
-    let count: number;
     let left = 0;
     let right = n;
     while (left < right) {
@@ -89,8 +88,7 @@ export const main = (n: number, a: number[], x: number[]): number[] => {
         right = mid;
       }
     }
-    count = left;
-    return count;
+    return left;
   });
 };
 
