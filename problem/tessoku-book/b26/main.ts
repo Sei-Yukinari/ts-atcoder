@@ -98,9 +98,11 @@ export const main = (n: number): number[] => {
 };
 
 const str = fs.readFileSync("/dev/stdin", "utf8");
-const input = createInputHandlers(str);
+if (str !== "") {
+  const input = createInputHandlers(str);
 
-const n = input.nextNum();
-const result = main(n);
-input.print(result.join("\n"));
-input.flush();
+  const n = input.nextNum();
+  const result = main(n);
+  input.print(result.join("\n"));
+  input.flush();
+}
